@@ -10,7 +10,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
-    <groupId>SEV_castom</groupId>
+    <groupId>SEV_customs</groupId>
     <artifactId>accounting_requirements_app</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 

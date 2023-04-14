@@ -1,9 +1,9 @@
-package sev_castom.accounting_requirements_app.dto;
+package sev_customs.accounting_requirements_app.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import sev_castom.accounting_requirements_app.model.UserRoles;
-import sev_castom.accounting_requirements_app.util.CreateValidationGroup;
+import sev_customs.accounting_requirements_app.model.UserRoles;
+import sev_customs.accounting_requirements_app.util.CreateValidationGroup;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;

@@ -1,4 +1,4 @@
-package sev_castom.accounting_requirements_app;
+package sev_customs.accounting_requirements_app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,8 +1,8 @@
-package sev_castom.accounting_requirements_app.dto;
+package sev_customs.accounting_requirements_app.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import sev_castom.accounting_requirements_app.model.UserRoles;
+import sev_customs.accounting_requirements_app.model.UserRoles;
 
 @Builder(toBuilder = true)
 @Getter

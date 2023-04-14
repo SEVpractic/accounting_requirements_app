@@ -1,9 +1,9 @@
-package sev_castom.accounting_requirements_app.dto;
+package sev_customs.accounting_requirements_app.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import sev_castom.accounting_requirements_app.util.CreateValidationGroup;
-import sev_castom.accounting_requirements_app.util.UpdateValidationGroup;
+import sev_customs.accounting_requirements_app.util.CreateValidationGroup;
+import sev_customs.accounting_requirements_app.util.UpdateValidationGroup;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;

@@ -1,4 +1,4 @@
-package sev_castom.accounting_requirements_app.dto;
+package sev_customs.accounting_requirements_app.dto;
 
 import lombok.Builder;
 import lombok.Getter;

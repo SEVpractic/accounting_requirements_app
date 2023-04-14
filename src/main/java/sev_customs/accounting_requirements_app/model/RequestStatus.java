@@ -1,4 +1,4 @@
-package sev_castom.accounting_requirements_app.model;
+package sev_customs.accounting_requirements_app.model;
 
 public enum RequestStatus {
     PENDING,
