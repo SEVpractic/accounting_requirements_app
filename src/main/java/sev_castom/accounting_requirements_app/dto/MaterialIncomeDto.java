@@ -2,7 +2,6 @@ package sev_castom.accounting_requirements_app.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import sev_castom.accounting_requirements_app.util.CreateValidationGroup;
 import sev_castom.accounting_requirements_app.util.UpdateValidationGroup;
 
@@ -13,7 +12,6 @@ import javax.validation.constraints.Size;
 
 @Builder(toBuilder = true)
 @Getter
-@RequiredArgsConstructor
 public class MaterialIncomeDto {
     @NotBlank(groups = CreateValidationGroup.class)
     private String name;

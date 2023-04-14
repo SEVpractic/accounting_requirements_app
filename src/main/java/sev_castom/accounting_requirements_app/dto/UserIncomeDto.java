@@ -2,7 +2,6 @@ package sev_castom.accounting_requirements_app.dto;
 
 import lombok.Builder;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import sev_castom.accounting_requirements_app.model.UserRoles;
 import sev_castom.accounting_requirements_app.util.CreateValidationGroup;
 
@@ -13,7 +12,6 @@ import javax.validation.constraints.Positive;
 
 @Builder(toBuilder = true)
 @Getter
-@RequiredArgsConstructor
 public class UserIncomeDto {
     @NotBlank
     private final String name;
