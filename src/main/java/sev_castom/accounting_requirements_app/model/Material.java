@@ -21,5 +21,5 @@ public class Material {
     @Column(name = "unit")
     private String unit;
     @Column(name = "amount")
-    private String amount;
+    private int amount;
 }
