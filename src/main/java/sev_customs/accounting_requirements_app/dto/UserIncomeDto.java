@@ -3,20 +3,19 @@ package sev_customs.accounting_requirements_app.dto;
 import lombok.Builder;
 import lombok.Getter;
 import sev_customs.accounting_requirements_app.model.UserRoles;
-import sev_customs.accounting_requirements_app.util.CreateValidationGroup;
+import sev_customs.accounting_requirements_app.util.validation.CreateValidationGroup;
+import sev_customs.accounting_requirements_app.util.validation.UpdateValidationGroup;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Positive;
+import javax.validation.constraints.*;
 
 @Builder(toBuilder = true)
 @Getter
 public class UserIncomeDto {
     @NotBlank
     private final String name;
-    @Positive(groups = CreateValidationGroup.class)
-    private final int departmentNumber;
+    @NotNull(groups = CreateValidationGroup.class)
+    @Positive(groups = {CreateValidationGroup.class, UpdateValidationGroup.class})
+    private final Integer departmentNumber;
     @Email
     @NotEmpty
     private final String email;

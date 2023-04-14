@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.*;
 import sev_customs.accounting_requirements_app.dto.UserDto;
 import sev_customs.accounting_requirements_app.dto.UserIncomeDto;
 import sev_customs.accounting_requirements_app.service.UserService;
-import sev_customs.accounting_requirements_app.util.CreateValidationGroup;
-import sev_customs.accounting_requirements_app.util.UpdateValidationGroup;
+import sev_customs.accounting_requirements_app.util.validation.CreateValidationGroup;
+import sev_customs.accounting_requirements_app.util.validation.UpdateValidationGroup;
 
 import javax.validation.constraints.Positive;
 
