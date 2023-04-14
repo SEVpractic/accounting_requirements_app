@@ -19,6 +19,7 @@ import static sev_customs.accounting_requirements_app.util.mappers.UserMapper.to
 @Transactional(readOnly = true)
 @RequiredArgsConstructor(onConstructor_ = @Autowired)
 public class UserServiceImpl implements UserService {
+    private final UtilService utilService;
     private final UserRepo userRepo;
 
     @Override
@@ -35,7 +36,7 @@ public class UserServiceImpl implements UserService {
     @Override
     @Transactional
     public UserDto update(UserIncomeDto dto, long userId) {
-        User user = findUserOrThrow(userId);
+        User user = utilService.findUserOrThrow(userId);
 
         update(dto, user);
         log.info("Обновлен пользователь с id = {} ", user.getId());
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserDto get(long userId) {
-        User user = findUserOrThrow(userId);
+        User user = utilService.findUserOrThrow(userId);
 
         log.info("Возвращен пользователь с id = {} ", user.getId());
         return toUserDto(user);
@@ -53,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(long userId) {
-        User user = findUserOrThrow(userId);
+        User user = utilService.findUserOrThrow(userId);
 
         userRepo.delete(user);
         log.info("Удален пользователь id = {} ", userId);
@@ -64,14 +65,7 @@ public class UserServiceImpl implements UserService {
                 .orElseGet(() -> userRepo.save(user));
     }
 
-    private User findUserOrThrow(long userId) {
-        return userRepo.findById(userId)
-                .orElseThrow(() -> new EntityNotExistException(
-                        String.format("Пользователя с id = %s не существует", userId))
-                );
-    }
-
-    private User update(UserIncomeDto dto, User user) {
+    private void update(UserIncomeDto dto, User user) {
         if (dto.getDepartmentNumber() != null) user.setDepartmentNumber(dto.getDepartmentNumber());
         if (dto.getRole() != null) user.setRole(dto.getRole());
     }
