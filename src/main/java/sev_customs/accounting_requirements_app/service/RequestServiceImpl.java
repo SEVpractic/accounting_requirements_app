@@ -19,7 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
-import static sev_customs.accounting_requirements_app.model.RequestStatus.PENDING;
+import static sev_customs.accounting_requirements_app.model.RequestStatus.*;
 import static sev_customs.accounting_requirements_app.model.UserRoles.SUPERVISOR;
 import static sev_customs.accounting_requirements_app.util.mappers.RequestMapper.toRequest;
 import static sev_customs.accounting_requirements_app.util.mappers.RequestMapper.toRequestDto;
@@ -132,14 +132,28 @@ public class RequestServiceImpl implements RequestService {
     }
 
     private void process(Request request, RequestStatus status) {
-        Material material = request.getMaterial();
-
-        if (request.getStatus().equals(PENDING) && material.getAmount() >= request.getAmount()) {
-            request.setStatus(status);
-            material.setAmount(material.getAmount() - request.getAmount());
+        if (status.equals(CONFIRMED) && request.getStatus().equals(PENDING)) {
+            confirmRequest(request);
+        } else if (status.equals(REJECTED) && request.getStatus().equals(PENDING)) {
+            rejectRequest(request);
         } else {
             throw new OperationFailedException(
-                    "Невозможно подтвердить"
+                    "Невозможно обработать требование, не ожидающее обработки"
+            );
+        }
+    }
+
+    private void rejectRequest(Request request) {
+        request.setStatus(REJECTED);
+    }
+
+    private void confirmRequest(Request request) {
+        if (request.getMaterial().getAmount() >= request.getAmount()) {
+            request.setStatus(CONFIRMED);
+            request.getMaterial().setAmount(request.getMaterial().getAmount() - request.getAmount());
+        } else {
+            throw new OperationFailedException(
+                    "Невозможно подтвердить требование, превышающее количество остатка материала на складе"
             );
         }
     }

@@ -1,0 +1,25 @@
+version: '3.1'
+services:
+  main-service:
+    container_name: accounting_requirements_app
+    ports:
+      - "8080:8080"
+    depends_on:
+      - main-db
+    build:
+      context: .
+    environment:
+      - spring.datasource.url=jdbc:postgresql://main-db:5432/ar_database
+      - spring.datasource.username=username
+      - spring.datasource.password=password
+  main-db:
+    image: postgres:13.7-alpine
+    container_name: accounting_requirements_database
+    volumes:
+      - /var/lib/postgresql/data/
+    ports:
+      - "9090:5432"
+    environment:
+      - POSTGRES_DB=ar_database
+      - POSTGRES_USER=username
+      - POSTGRES_PASSWORD=password
