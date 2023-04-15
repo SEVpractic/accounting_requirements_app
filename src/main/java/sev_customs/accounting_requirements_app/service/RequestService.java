@@ -13,7 +13,7 @@ public interface RequestService {
 
     RequestDto get(long requestId);
 
-    List<RequestDto> getAll(long requestId, int from, int size);
+    List<RequestDto> getAll(int from, int size);
 
     List<RequestDto> getPending(int from, int size);
 

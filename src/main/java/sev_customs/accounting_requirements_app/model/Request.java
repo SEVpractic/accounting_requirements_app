@@ -22,6 +22,7 @@ public class Request {
     @JoinColumn(name = "material_id")
     private Material material;
     @Column(name = "status")
+    @Enumerated(EnumType.STRING)
     private RequestStatus status;
     @Column(name = "amount")
     private int amount;

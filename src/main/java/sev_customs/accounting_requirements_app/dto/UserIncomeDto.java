@@ -16,9 +16,9 @@ public class UserIncomeDto {
     @NotNull(groups = CreateValidationGroup.class)
     @Positive(groups = {CreateValidationGroup.class, UpdateValidationGroup.class})
     private final Integer departmentNumber;
-    @Email
-    @NotEmpty
+    @Email(groups = CreateValidationGroup.class)
+    @NotEmpty(groups = CreateValidationGroup.class)
     private final String email;
-    @NotBlank(groups = CreateValidationGroup.class)
+    @NotNull(groups = CreateValidationGroup.class)
     private final UserRoles role;
 }

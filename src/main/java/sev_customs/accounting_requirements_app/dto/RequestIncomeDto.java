@@ -11,7 +11,7 @@ import javax.validation.constraints.Positive;
 @Builder(toBuilder = true)
 @Getter
 public class RequestIncomeDto {
-    @NotNull(groups = CreateValidationGroup.class)
+    @NotNull(groups = {CreateValidationGroup.class, UpdateValidationGroup.class})
     @Positive(groups = {CreateValidationGroup.class, UpdateValidationGroup.class})
     private final Long materialId;
     @NotNull(groups = CreateValidationGroup.class)

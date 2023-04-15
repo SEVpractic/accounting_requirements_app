@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 import sev_customs.accounting_requirements_app.dto.MaterialDto;
 import sev_customs.accounting_requirements_app.dto.MaterialIncomeDto;
 import sev_customs.accounting_requirements_app.service.MaterialService;
-import sev_customs.accounting_requirements_app.util.mappers.MaterialMapper;
 import sev_customs.accounting_requirements_app.util.validation.CreateValidationGroup;
 import sev_customs.accounting_requirements_app.util.validation.UpdateValidationGroup;
 

@@ -61,7 +61,7 @@ public class MaterialServiceImpl implements MaterialService {
 
     @Override
     public List<MaterialDto> getAll(int from, int size) {
-        Pageable pageable = utilService.createPagination(from, size, "material_id");
+        Pageable pageable = utilService.createPagination(from, size, "id");
         List<Material> materials = materialRepo.findAll(pageable).toList();
 
         log.info("Возвращен список всех материалов");

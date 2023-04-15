@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Objects;
 
+import static sev_customs.accounting_requirements_app.model.RequestStatus.PENDING;
 import static sev_customs.accounting_requirements_app.model.UserRoles.SUPERVISOR;
 import static sev_customs.accounting_requirements_app.util.mappers.RequestMapper.toRequest;
 import static sev_customs.accounting_requirements_app.util.mappers.RequestMapper.toRequestDto;
@@ -39,6 +40,7 @@ public class RequestServiceImpl implements RequestService {
         Request request = toRequest(dto, user, material);
 
         request.setCreatedOn(LocalDateTime.now());
+        request.setStatus(PENDING);
         request = requestRepo.save(request);
         log.info("Сохранено требование с id = {} ", request.getId());
 
@@ -66,8 +68,8 @@ public class RequestServiceImpl implements RequestService {
     }
 
     @Override
-    public List<RequestDto> getAll(long requestId, int from, int size) {
-        Pageable pageable = utilService.createPagination(from, size, "created_on");
+    public List<RequestDto> getAll(int from, int size) {
+        Pageable pageable = utilService.createPagination(from, size, "createdOn");
         List<Request> requests = requestRepo.findAll(pageable).toList();
 
         log.info("Возвращен список всех запросов");
@@ -76,8 +78,8 @@ public class RequestServiceImpl implements RequestService {
 
     @Override
     public List<RequestDto> getPending(int from, int size) {
-        Pageable pageable = utilService.createPagination(from, size, "created_on");
-        List<Request> requests = requestRepo.findAllByStatusIs(RequestStatus.PENDING, pageable).toList();
+        Pageable pageable = utilService.createPagination(from, size, "createdOn");
+        List<Request> requests = requestRepo.findAllByStatus(PENDING, pageable).toList();
 
         log.info("Возвращен список всех запросов, ожидающих подтверждения");
         return toRequestDto(requests);
@@ -130,6 +132,15 @@ public class RequestServiceImpl implements RequestService {
     }
 
     private void process(Request request, RequestStatus status) {
-        request.setStatus(status);
+        Material material = request.getMaterial();
+
+        if (request.getStatus().equals(PENDING) && material.getAmount() >= request.getAmount()) {
+            request.setStatus(status);
+            material.setAmount(material.getAmount() - request.getAmount());
+        } else {
+            throw new OperationFailedException(
+                    "Невозможно подтвердить"
+            );
+        }
     }
 }

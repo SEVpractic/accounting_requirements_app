@@ -50,16 +50,15 @@ public class RequestController {
         return requestService.get(requestId);
     }
 
-    @GetMapping("/{requestId}")
-    public List<RequestDto> getAll(@PathVariable("requestId") @Positive long requestId,
-                                    @RequestParam(name = "from", defaultValue = "0") @PositiveOrZero int from,
-                                    @RequestParam(name = "size", defaultValue = "10") @Positive int size) {
-        return requestService.getAll(requestId, from, size);
+    @GetMapping
+    public List<RequestDto> getAll(@RequestParam(name = "from", defaultValue = "0") @PositiveOrZero int from,
+                                   @RequestParam(name = "size", defaultValue = "10") @Positive int size) {
+        return requestService.getAll(from, size);
     }
 
     @GetMapping("/pending")
     public List<RequestDto> getPending(@RequestParam(name = "from", defaultValue = "0") @PositiveOrZero int from,
-                                        @RequestParam(name = "size", defaultValue = "10") @Positive int size) {
+                                       @RequestParam(name = "size", defaultValue = "10") @Positive int size) {
         return requestService.getPending(from, size);
     }
 
