@@ -32,8 +32,8 @@ public class MaterialController {
 
     @PatchMapping("/{materialId}")
     public MaterialDto update(@Validated(UpdateValidationGroup.class) @RequestBody MaterialIncomeDto dto,
-                          @PathVariable("materialId") @Positive long materialId,
-                          @RequestParam(name = "userId") long userId) {
+                              @PathVariable("materialId") @Positive long materialId,
+                              @RequestParam(name = "userId") long userId) {
         return materialsService.update(dto, materialId, userId);
     }
 
@@ -44,7 +44,7 @@ public class MaterialController {
 
     @GetMapping
     public List<MaterialDto> getAll(@RequestParam(name = "from", defaultValue = "0") @PositiveOrZero int from,
-                                @RequestParam(name = "size", defaultValue = "10") @Positive int size) {
+                                    @RequestParam(name = "size", defaultValue = "10") @Positive int size) {
         return materialsService.getAll(from, size);
     }
 

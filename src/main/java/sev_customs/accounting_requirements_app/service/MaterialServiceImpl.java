@@ -28,6 +28,7 @@ public class MaterialServiceImpl implements MaterialService {
     private final MaterialRepo materialRepo;
 
     @Override
+    @Transactional
     public MaterialDto create(MaterialIncomeDto dto, long userId) {
         Material material = toMaterial(dto);
         User user = findAndCheckUser(userId);
@@ -39,6 +40,7 @@ public class MaterialServiceImpl implements MaterialService {
     }
 
     @Override
+    @Transactional
     public MaterialDto update(MaterialIncomeDto dto, long materialId, long userId) {
         Material material = utilService.findMaterialOrThrow(materialId);
         findAndCheckUser(userId);
@@ -62,10 +64,12 @@ public class MaterialServiceImpl implements MaterialService {
         Pageable pageable = utilService.createPagination(from, size, "material_id");
         List<Material> materials = materialRepo.findAll(pageable).toList();
 
+        log.info("Возвращен список всех материалов");
         return toMaterialDto(materials);
     }
 
     @Override
+    @Transactional
     public void delete(long materialId, long userId) {
         Material material = utilService.findMaterialOrThrow(materialId);
         findAndCheckUser(userId);

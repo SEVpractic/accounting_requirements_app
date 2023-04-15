@@ -9,7 +9,6 @@ import sev_customs.accounting_requirements_app.dto.UserDto;
 import sev_customs.accounting_requirements_app.dto.UserIncomeDto;
 import sev_customs.accounting_requirements_app.model.User;
 import sev_customs.accounting_requirements_app.storage.UserRepo;
-import sev_customs.accounting_requirements_app.util.exceptions.EntityNotExistException;
 
 import static sev_customs.accounting_requirements_app.util.mappers.UserMapper.toUser;
 import static sev_customs.accounting_requirements_app.util.mappers.UserMapper.toUserDto;
@@ -53,6 +52,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void delete(long userId) {
         User user = utilService.findUserOrThrow(userId);
 

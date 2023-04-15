@@ -9,8 +9,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import sev_customs.accounting_requirements_app.model.Material;
+import sev_customs.accounting_requirements_app.model.Request;
 import sev_customs.accounting_requirements_app.model.User;
 import sev_customs.accounting_requirements_app.storage.MaterialRepo;
+import sev_customs.accounting_requirements_app.storage.RequestRepo;
 import sev_customs.accounting_requirements_app.storage.UserRepo;
 import sev_customs.accounting_requirements_app.util.exceptions.EntityNotExistException;
 
@@ -21,6 +23,7 @@ import sev_customs.accounting_requirements_app.util.exceptions.EntityNotExistExc
 public class UtilService {
     private final UserRepo userRepo;
     private final MaterialRepo materialRepo;
+    private final RequestRepo requestRepo;
 
     public User findUserOrThrow(long userId) {
         return userRepo.findById(userId)
@@ -33,6 +36,13 @@ public class UtilService {
         return materialRepo.findById(materialId)
                 .orElseThrow(() -> new EntityNotExistException(
                         String.format("Материал с id = %s не существует", materialId))
+                );
+    }
+
+    public Request findRequestOrThrow(long requestId) {
+        return requestRepo.findById(requestId)
+                .orElseThrow(() -> new EntityNotExistException(
+                        String.format("Требование с id = %s не существует", requestId))
                 );
     }
 

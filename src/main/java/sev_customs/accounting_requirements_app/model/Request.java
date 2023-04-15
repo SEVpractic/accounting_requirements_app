@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "requests")
@@ -24,4 +25,6 @@ public class Request {
     private RequestStatus status;
     @Column(name = "amount")
     private int amount;
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
 }

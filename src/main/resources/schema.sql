@@ -22,5 +22,6 @@ CREATE table IF NOT EXISTS requests(
     user_id bigint REFERENCES users (user_id) ON DELETE CASCADE,
     material_id bigint REFERENCES materials (material_id) ON DELETE CASCADE,
     status varchar(256) NOT NULL,
-    amount int NOT NULL
+    amount int NOT NULL,
+    created_on timestamp without time zone
 );
